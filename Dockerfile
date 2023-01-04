@@ -14,9 +14,9 @@ RUN pip install numpy
 # Make ssh dir
 # Create known_hosts
 # Add github key
-RUN mkdir /root/.ssh/ \
- && touch /root/.ssh/known_hosts \
- && ssh-keyscan github.org >> /root/.ssh/known_hosts
+RUN mkdir /root/.ssh/ && \
+    touch /root/.ssh/known_hosts && \
+    ssh-keyscan github.org >> /root/.ssh/known_hosts
 
 # }}}
 
@@ -35,13 +35,13 @@ RUN mkdir /gcsdk && \
 # iCoMut {{{
 
 # Clone the conf files into the docker container
-RUN --mount=type=ssh \
-    git clone git@github.com:broadinstitute/icomut-lattice.git
-
-RUN git clone https://github.com/broadinstitute/icomut-lattice.git && mv icomut-lattice /usr/local/lib/icomut_lattice
-RUN cp /usr/local/lib/icomut_lattice/notebook/py_modules /usr/local/lib/py_modules
+RUN --mount=type=ssh git clone git@github.com:broadinstitute/icomut-lattice.git && \
+    mv icomut-lattice /usr/local/lib/icomut_lattice && \
+    cp /usr/local/lib/icomut_lattice/notebook/py_modules /usr/local/lib/py_modules
 
 # }}}
+
+COPY icomut_notebook.ipynb /home/jovyan/icomut_notebook.ipynb
 
 #
 # CLEAN UP {{{
@@ -54,6 +54,6 @@ RUN rm -rf /build/*
 # CONFIGURE ENVIRONMENT {{{
 
 ENV LD_LIBRARY_PATH=/usr/local/lib
-ENV PYTHONPATH "${PYTHONPATH}:/usr/local/lib"
+ENV PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 # }}}
