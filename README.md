@@ -23,7 +23,7 @@ gcloud auth application-default login
 ### Start Docker container and open notebook
 1) In your terminal, run:
 ```
-docker run -p 8001:8001 -v ~/.config/gcloud:/home/jovyan/.config/gcloud --name icomut_container gcr.io/broad-getzlab-workflows/share_icomut:latest jupyter notebook --allow-root --port=8001
+docker run -i -p 8001:8001 -v ~/.config/gcloud:/home/jovyan/.config/gcloud --name icomut_container gcr.io/broad-getzlab-workflows/share_icomut:latest jupyter notebook --allow-root --port=8001
 ```
 2) Copy the link from terminal and paste into an internet browser
 
@@ -32,3 +32,9 @@ docker run -p 8001:8001 -v ~/.config/gcloud:/home/jovyan/.config/gcloud --name i
 2) Change the date_id variable or filenames (if necessary) 
 3) Hit the button with two triangles (looks like fast-forward) to run all cells
 4) View and manipulate the iCoMut plot at the bottom of the notebook
+
+### Docker commands
+- To stop the docker container from the running terminal, press Ctrl-C
+- To restart a stopped docker container, run `docker start icomut_container`
+  - To find the notebook link after restarting, run `jupyter notebook list`
+- If you wish to remove a docker container: `docker rm icomut_container`. The container can be recreated later using the command in the 1st Run section.
