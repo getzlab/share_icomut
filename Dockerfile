@@ -1,6 +1,8 @@
 FROM jupyter/minimal-notebook:python-3.8 AS base
 
-WORKDIR build
+USER root
+
+WORKDIR /build
 
 # update apt
 ARG version
@@ -16,7 +18,7 @@ RUN pip install numpy
 # Add github key
 RUN mkdir /root/.ssh/ && \
     touch /root/.ssh/known_hosts && \
-    ssh-keyscan github.org >> /root/.ssh/known_hosts
+    ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 # }}}
 
@@ -35,13 +37,15 @@ RUN mkdir /gcsdk && \
 # iCoMut {{{
 
 # Clone the conf files into the docker container
-RUN --mount=type=ssh git clone git@github.com:broadinstitute/icomut-lattice.git && \
-    mv icomut-lattice /usr/local/lib/icomut_lattice && \
-    cp /usr/local/lib/icomut_lattice/notebook/py_modules /usr/local/lib/py_modules
+RUN --mount=type=ssh git clone git@github.com:broadinstitute/icomut-lattice.git
+
+WORKDIR /app
+RUN cp -Lr /build/icomut-lattice/notebooks/icomut . && \
+    cp -r /build/icomut-lattice/notebooks/py_modules .
+
+COPY icomut_notebook.ipynb .
 
 # }}}
-
-COPY icomut_notebook.ipynb /home/jovyan/icomut_notebook.ipynb
 
 #
 # CLEAN UP {{{
@@ -53,7 +57,6 @@ RUN rm -rf /build/*
 #
 # CONFIGURE ENVIRONMENT {{{
 
-ENV LD_LIBRARY_PATH=/usr/local/lib
 ENV PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 # }}}
