@@ -35,6 +35,13 @@ docker run -i -p 8001:8001 -v ~/.config/gcloud:/home/jovyan/.config/gcloud --nam
 
 ### Docker commands
 - To stop the docker container from the running terminal, press Ctrl-C
-- To restart a stopped docker container, run `docker start icomut_container`
-  - To find the notebook link after restarting, run `jupyter notebook list`
 - If you wish to remove a docker container: `docker rm icomut_container`. The container can be recreated later using the command in the 1st Run section.
+- It is also simple to restart a stopped docker container (which maintains any downloaded data/anything run in the container):
+  1) `docker start icomut_container`
+  2) `docker exec -it icomut_container bash`
+  3) Display the notebook link after restarting (if notebook was closed in broswer): `jupyter notebook list`
+  4) Copy link from terminal and paste into an internet browser
+- To exit docker terminal: `Ctrl-D`
+- To stop docker container: `docker stop icomut_container`
+  
+
