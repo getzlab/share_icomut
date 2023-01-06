@@ -8,6 +8,7 @@ Dockerfile, tutorial, and standard jupyter notebook for viewing iCoMut plot exte
 
 ### Authenticate gcloud
 1) Download and install the Google Cloud SDK command line interface, following [these instructions](https://cloud.google.com/sdk/docs/install-sdk).
+  - Note: Python typically must be installed locally in order to install gcloud SDK.
 2) After installation, open a command line terminal (search for `terminal` on Mac or `PowerShell` on Windows)
 3) Type command and follow instructions to authenticate using your google account:
 ```
@@ -44,4 +45,5 @@ docker run -i -p 8001:8001 -v ~/.config/gcloud:/home/jovyan/.config/gcloud --nam
 - To exit docker terminal: `Ctrl-D`
 - To stop docker container: `docker stop icomut_container`
   
-
+# Development
+- In order to rebuild the Docker image, you must have git access to the [icomut-lattice](https://github.com/broadinstitute/icomut-lattice) repo. Contact [Duyen Nguyen](dnguyen@broadinstitute.org) or the [Broad Institute Pattern team](pattern@broadinstitute.org) for access.
