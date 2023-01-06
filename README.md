@@ -46,4 +46,4 @@ docker run -i -p 8001:8001 -v ~/.config/gcloud:/home/jovyan/.config/gcloud --nam
 - To stop docker container: `docker stop icomut_container`
   
 # Development
-- In order to rebuild the Docker image, you must have git access to the [icomut-lattice](https://github.com/broadinstitute/icomut-lattice) repo. Contact [Duyen Nguyen](dnguyen@broadinstitute.org) or the [Broad Institute Pattern team](pattern@broadinstitute.org) for access.
+- In order to rebuild the Docker image, you must have git access to the [icomut-lattice](https://github.com/broadinstitute/icomut-lattice) repo. Contact [Duyen Nguyen](mailto:dnguyen@broadinstitute.org) or the [Broad Institute Pattern team](mailto:pattern@broadinstitute.org) for access.
